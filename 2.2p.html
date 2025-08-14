@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FSD Experiment 2.2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    select {
+      padding: 5px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #productList {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    p {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      width: 150px;
+      background: white;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Product List</h2>
+
+  <label for="categoryFilter">Filter Items by Category:</label>
+  <select id="categoryFilter" onchange="filterProducts()">
+    <option value="All">All</option>
+    <option value="Furniture">Furniture</option>
+    <option value="Appliances">Appliances</option>
+    <option value="Toys">Toys</option>
+  </select>
+
+  <div id="productList"></div>
+
+  <script>
+    const products = [
+      { itemName: "Sofa", category: "Furniture" },
+      { itemName: "Dining Table", category: "Furniture" },
+      { itemName: "Microwave", category: "Appliances" },
+      { itemName: "Refrigerator", category: "Appliances" },
+      { itemName: "Action Figure", category: "Toys" },
+      { itemName: "Board Game", category: "Toys" }
+    ];
+
+    function displayProducts(filteredProducts) {
+      const productList = document.getElementById("productList");
+      productList.innerHTML = "";
+
+      filteredProducts.forEach(product => {
+        const p = document.createElement("p");
+        p.textContent = product.itemName;
+        productList.appendChild(p);
+      });
+    }
+
+    function filterProducts() {
+      const selectedCategory = document.getElementById("categoryFilter").value;
+
+      if (selectedCategory === "All") {
+        displayProducts(products);
+      } else {
+        const filtered = products.filter(p => p.category === selectedCategory);
+        displayProducts(filtered);
+      }
+    }
+
+    window.onload = function() {
+      displayProducts(products);
+    };
+  </script>
+
+</body>
+</html>
